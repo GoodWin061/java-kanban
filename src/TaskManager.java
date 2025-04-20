@@ -14,7 +14,6 @@ public class TaskManager {
         tasks = new HashMap<>();
         subTasks = new HashMap<>();
         epics = new HashMap<>();
-        epics = new HashMap<>();
     }
 
     public void addTask(String title, String description) {
