@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -7,17 +9,19 @@ public class Main {
         TaskManager taskManager = new TaskManager();
         taskManager.addTask("Задача1", "Описание 1");
         taskManager.addTask("Задача2", "Описание 1");
-        taskManager.viewTasks();
-
+        List<Task> tasks = taskManager.getAllTasks();
+        for (Task task : tasks) {
+            System.out.println(task);
+        }
 
         taskManager.addEpic("эпик1", "описание эпика1");
-        taskManager.viewEpics();
+        List<Epic> epics = taskManager.getAllEpic();
+        for (Epic epic : epics) {
+            System.out.println(epic);
+        }
 
         taskManager.addSubTask("подзадача1", "описание подзадачи1", 2);
         taskManager.addSubTask("подзадача2", "описание подзадачи2", 2);
         taskManager.addSubTask("подзадача3", "описание подзадачи3", 2);
-        taskManager.viewSubTasks();
-
-
     }
 }
