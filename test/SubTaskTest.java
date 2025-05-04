@@ -1,16 +1,10 @@
 import org.junit.jupiter.api.Test;
+import main.task.Epic;
+import main.task.SubTask;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SubTaskTest {
-
-    @Test
-    void getEpicId() {
-    }
-
-    @Test
-    void testToString() {
-    }
 
     @Test
     public void testSubTaskEquality() {

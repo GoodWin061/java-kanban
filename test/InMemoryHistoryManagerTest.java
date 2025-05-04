@@ -1,4 +1,7 @@
+import main.history.HistoryManager;
+import main.history.InMemoryHistoryManager;
 import org.junit.jupiter.api.Test;
+import main.task.Task;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,13 +14,5 @@ class InMemoryHistoryManagerTest {
         task.setTitle("Задача 2");
         Task taskFromHistory = historyManager.getHistory().get(0);;
         assertEquals("Задача 1", taskFromHistory.getTitle());
-    }
-
-    @Test
-    void add() {
-    }
-
-    @Test
-    void getHistory() {
     }
 }

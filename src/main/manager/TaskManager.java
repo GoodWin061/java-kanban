@@ -1,4 +1,6 @@
-import java.util.List;
+package main.manager;
+
+import main.task.*;
 
 public interface TaskManager {
     void addTask(String title, String description);

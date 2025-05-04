@@ -1,5 +1,12 @@
+import main.manager.InMemoryTaskManager;
+import main.manager.TaskManager;
+import main.task.Status;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import main.task.Epic;
+import main.task.SubTask;
+import main.task.Task;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryTaskManagerTest {
@@ -55,77 +62,5 @@ class InMemoryTaskManagerTest {
         assertEquals(task.getTitle(), addedTask.getTitle());
         assertEquals(task.getDescription(), addedTask.getDescription());
         assertEquals(Status.NEW, addedTask.getStatus());
-    }
-
-    @Test
-    void addTask() {
-    }
-
-    @Test
-    void addSubTask() {
-    }
-
-    @Test
-    void addEpic() {
-    }
-
-    @Test
-    void getIdTask() {
-    }
-
-    @Test
-    void getIdSubTask() {
-    }
-
-    @Test
-    void getIdEpic() {
-    }
-
-    @Test
-    void getAllTasks() {
-    }
-
-    @Test
-    void getAllSubTask() {
-    }
-
-    @Test
-    void getAllEpic() {
-    }
-
-    @Test
-    void deleteAllTask() {
-    }
-
-    @Test
-    void updateTask() {
-    }
-
-    @Test
-    void updateSubTask() {
-    }
-
-    @Test
-    void updateEpic() {
-    }
-
-    @Test
-    void deleteTask() {
-    }
-
-    @Test
-    void deleteSubTask() {
-    }
-
-    @Test
-    void deleteEpic() {
-    }
-
-    @Test
-    void getSubTaskEpic() {
-    }
-
-    @Test
-    void updateStatus() {
     }
 }

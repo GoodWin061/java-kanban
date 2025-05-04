@@ -1,3 +1,7 @@
+import main.manager.InMemoryTaskManager;
+import main.task.Epic;
+import main.task.Task;
+
 import java.util.List;
 
 public class Main {

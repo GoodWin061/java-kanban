@@ -1,13 +1,19 @@
+package main.manager;
+
+import main.history.HistoryManager;
+import main.task.*;
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class InMemoryTaskManager implements TaskManager{
+public class InMemoryTaskManager implements TaskManager {
     private int idCounter;
     private final HashMap<Integer, Task> tasks;
     private final HashMap<Integer, SubTask> subTasks;
     private final HashMap<Integer, Epic> epics;
-    private final HistoryManager historyManager = new InMemoryHistoryManager();
+    private final HistoryManager historyManager = Managers.getDefaultHistory();
     private Epic epic;
 
     public InMemoryTaskManager() {

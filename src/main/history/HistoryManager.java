@@ -1,3 +1,6 @@
+package main.history;
+import main.task.Task;
+
 import java.util.List;
 
 public interface HistoryManager {

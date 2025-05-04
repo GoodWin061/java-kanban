@@ -1,3 +1,5 @@
+package main.task;
+
 public enum Status {
     NEW("Новая задача"),
     IN_PROGRESS("В процессе выполнения"),
