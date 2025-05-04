@@ -10,7 +10,11 @@ public class Epic extends Task {
     }
 
     public void addSubTask(SubTask subTask) {
-        subTasks.add(subTask);
+        if (subTask.getId() != this.getId()) {
+            subTasks.add(subTask);
+        } else {
+            System.out.println("Задача не может быть добавлена в качестве Эпика.");
+        }
     }
 
     public List<SubTask> getSubTasks() {

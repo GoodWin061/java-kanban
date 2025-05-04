@@ -6,7 +6,7 @@ public class Main {
         int idCounter = 0;
         System.out.println("Поехали!");
 
-        TaskManager taskManager = new TaskManager();
+        InMemoryTaskManager taskManager = new InMemoryTaskManager();
         taskManager.addTask("Задача1", "Описание 1");
         taskManager.addTask("Задача2", "Описание 1");
         List<Task> tasks = taskManager.getAllTasks();
