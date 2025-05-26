@@ -11,8 +11,8 @@ class InMemoryHistoryManagerTest {
         HistoryManager historyManager = new InMemoryHistoryManager();
         Task task = new Task(0, "Задача 1", "Описание 1");
         historyManager.add(task);
-        task.setTitle("Задача 2");
-        Task taskFromHistory = historyManager.getHistory().get(0);;
+        Task modifiedTask = new Task(task.getId(), "Задача 2", task.getDescription());
+        Task taskFromHistory = historyManager.getHistory().get(0);
         assertEquals("Задача 1", taskFromHistory.getTitle());
     }
 

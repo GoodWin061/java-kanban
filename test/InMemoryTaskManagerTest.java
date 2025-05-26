@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import main.task.Epic;
 import main.task.SubTask;
 import main.task.Task;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -58,7 +59,9 @@ class InMemoryTaskManagerTest {
     void testTaskImmutabilityAdd() {
         Task task = new Task("Задача 1", "Описание 1");
         taskManager.addTask(task.getTitle(), task.getDescription());
-        Task addedTask = taskManager.getIdTask(0);
+        List<Task> tasks = ((InMemoryTaskManager) taskManager).getAllTasks();
+        assertFalse(tasks.isEmpty(), "Список задач не должен быть пустым");
+        Task addedTask = tasks.get(tasks.size() - 1);
         assertEquals(task.getTitle(), addedTask.getTitle());
         assertEquals(task.getDescription(), addedTask.getDescription());
         assertEquals(Status.NEW, addedTask.getStatus());
