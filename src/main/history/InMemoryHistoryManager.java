@@ -11,6 +11,16 @@ public class InMemoryHistoryManager implements HistoryManager {
     private Node head;
     private Node tail;
 
+    private final static class Node {
+        Task task;
+        Node prev;
+        Node next;
+
+        public Node(Task task) {
+            this.task = task;
+        }
+    }
+
     @Override
     public void add(Task task) {
         removeNodeIfExists(task.getId());
