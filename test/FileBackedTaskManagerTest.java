@@ -62,9 +62,10 @@ public class FileBackedTaskManagerTest {
         loaded.loadFromFile();
 
         List<Task> tasks = loaded.getAllTasks();
+
         assertEquals(2, tasks.size());
-        assertEquals("Task 1", tasks.get(0).getTitle());
-        assertEquals("Task 2", tasks.get(1).getTitle());
+        assertEquals("Задача 1", tasks.get(0).getTitle());
+        assertEquals("Задача 2", tasks.get(1).getTitle());
     }
 
     @Test
