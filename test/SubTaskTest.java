@@ -19,6 +19,6 @@ class SubTaskTest {
         SubTask task = new SubTask(1, "Задача 1", "Описание 1", 1);
         Epic epic = new Epic(1, "Задача 2", "Описание 2");
 
-        assertEquals(task, epic, "Задачи равны");
+        assertNotEquals(task, epic, "Подзадача и эпик не равны");
     }
 }
