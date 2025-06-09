@@ -50,7 +50,7 @@ public class FileBackedTaskManagerTest {
 
         List<Task> tasks = manager.getAllTasks();
         assertEquals(2, tasks.size());
-        assertEquals("Task 1", tasks.get(0).getTitle());
+        assertEquals("Задача 1", tasks.get(0).getTitle());
     }
 
     @Test
