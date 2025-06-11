@@ -44,26 +44,22 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     public void loadFromFile() {
-        try {
-            if (!file.exists()) {
-                System.out.println("Файл задач не найден");
-                return;
-            }
+        if (!file.exists()) {
+            System.out.println("Файл задач не найден");
+            return;
+        }
 
-            List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
-
+        try (BufferedReader reader = Files.newBufferedReader(file.toPath(), StandardCharsets.UTF_8)) {
             getTasks().clear();
             getSubTasks().clear();
             getEpics().clear();
 
-            for (int i = 1; i < lines.size(); i++) {
-                String line = lines.get(i);
-                if (line.isBlank()) {
-                    continue;
-                }
+            String header = reader.readLine();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.isBlank()) continue;
 
                 String[] parts = line.split(",", -1);
-
                 int id = Integer.parseInt(parts[0]);
                 String type = parts[1];
                 String title = parts[2];
@@ -72,19 +68,17 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 String epicIdStr = parts.length > 5 ? parts[5] : "";
 
                 switch (type) {
-                    case "TASK":
+                    case "TASK" -> {
                         Task task = new Task(id, title, description);
                         task.setStatus(status);
                         getTasks().put(id, task);
-                        break;
-
-                    case "EPIC":
+                    }
+                    case "EPIC" -> {
                         Epic epic = new Epic(id, title, description);
                         epic.setStatus(status);
                         getEpics().put(id, epic);
-                        break;
-
-                    case "SUBTASK":
+                    }
+                    case "SUBTASK" -> {
                         int epicId = Integer.parseInt(epicIdStr);
                         SubTask subTask = new SubTask(id, title, description, epicId);
                         subTask.setStatus(status);
@@ -93,10 +87,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                         if (epicForSub != null) {
                             epicForSub.addSubTask(subTask);
                         }
-                        break;
-
-                    default:
-                        System.out.println("Неизвестный тип задачи: " + type);
+                    }
+                    default -> System.out.println("Неизвестный тип задачи: " + type);
                 }
 
                 if (id >= getIdCounter()) {
@@ -109,7 +101,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             }
 
             System.out.println("Загрузка из файла завершена.");
-
         } catch (IOException e) {
             System.out.println("Ошибка чтения файла: " + e.getMessage());
         }
