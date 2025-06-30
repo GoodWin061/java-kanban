@@ -12,7 +12,7 @@ class InMemoryHistoryManagerTest {
     @Test
     public void historyTaskIsNoTModifiedAfterAdding() {
         HistoryManager historyManager = new InMemoryHistoryManager();
-        Task task = new Task(0, "Задача1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
+        Task task = new Task(0, "Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
         historyManager.add(task);
         Task modifiedTask = new Task(task.getId(), "Задача2", "Описание 2", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
         Task taskFromHistory = historyManager.getHistory().get(0);
