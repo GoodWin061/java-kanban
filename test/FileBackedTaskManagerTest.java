@@ -64,7 +64,7 @@ public class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskMan
     @Test
     void testLoadMultipleTasks() {
         manager.addTask("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
-        manager.addTask("Задача 2", "Описание 2", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
+        manager.addTask("Задача 2", "Описание 2", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 16, 0));
 
         FileBackedTaskManager loaded = new FileBackedTaskManager(tempFile);
         loaded.loadFromFile();
