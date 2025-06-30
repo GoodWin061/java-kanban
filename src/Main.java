@@ -7,6 +7,8 @@ import java.util.List;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 
 public class Main {
@@ -18,8 +20,8 @@ public class Main {
         FileBackedTaskManager taskManager1 = new FileBackedTaskManager(file);
 
         InMemoryTaskManager taskManager = new InMemoryTaskManager();
-        taskManager1.addTask("Задача1", "Описание 1");
-        taskManager1.addTask("Задача2", "Описание 1");
+        taskManager1.addTask("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
+        taskManager1.addTask("Задача 2", "Описание 1", Duration.ofHours(1), LocalDateTime.of(2025, 6, 30, 18, 0));
         List<Task> tasks = taskManager1.getAllTasks();
         for (Task task : tasks) {
             System.out.println(task);
@@ -31,9 +33,9 @@ public class Main {
             System.out.println(epic);
         }
 
-        taskManager1.addSubTask("подзадача1", "описание подзадачи1", 2);
-        taskManager1.addSubTask("подзадача2", "описание подзадачи2", 2);
-        taskManager1.addSubTask("подзадача3", "описание подзадачи3", 2);
+        taskManager1.addSubTask("подзадача1", "описание подзадачи1", Duration.ofHours(1), LocalDateTime.of(2025, 6, 28, 14, 0), 2);
+        taskManager1.addSubTask("подзадача2", "описание подзадачи2", Duration.ofHours(2), LocalDateTime.of(2025, 6, 29, 16, 0), 2);
+        taskManager1.addSubTask("подзадача3", "описание подзадачи3", Duration.ofHours(3), LocalDateTime.of(2025, 6, 30, 20, 0), 2);
 
         System.out.println("Абсолютный путь до файла: " + file.getAbsolutePath());
 
