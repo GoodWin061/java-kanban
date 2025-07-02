@@ -67,9 +67,10 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 String title = parts[2];
                 Status status = Status.valueOf(parts[3]);
                 String description = parts[4];
+                String durationStr = parts[5];
                 Duration duration;
-                if (!parts[5].equals("null") && !parts[5].isBlank()) {
-                    long minutes = Long.parseLong(parts[5]);
+                if (durationStr != null && !durationStr.isBlank() && !durationStr.equals("null")) {
+                    long minutes = Long.parseLong(durationStr);
                     duration = Duration.ofMinutes(minutes);
                 } else {
                     duration = null;
