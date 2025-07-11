@@ -54,7 +54,7 @@ public class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskMan
     @Test
     void testSaveMultipleTasks() {
         Task task1 = new Task("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
-        Task task2 = new Task("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
+        Task task2 = new Task("Задача 2", "Описание 2", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 16, 0));
         manager.addTask(task1);
         manager.addTask(task2);
 
@@ -66,7 +66,7 @@ public class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskMan
     @Test
     void testLoadMultipleTasks() {
         Task task1 = new Task("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
-        Task task2 = new Task("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
+        Task task2 = new Task("Задача 2", "Описание 2", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 16, 0));
         manager.addTask(task1);
         manager.addTask(task2);
 
