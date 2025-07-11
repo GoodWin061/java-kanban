@@ -19,7 +19,8 @@ class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager> {
     @BeforeEach
     public void setUp() {
         taskManager = new InMemoryTaskManager();
-        taskManager.addEpic("Эпик 1", "Описание эпика 1");
+        Epic epic1 = new Epic(0, "Эпик 1", "Описание эпика 1");
+        taskManager.addEpic(epic1);
     }
 
     @Override
@@ -29,14 +30,16 @@ class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager> {
 
     @Test
     void testCannotAddEpic() {
-        taskManager.addSubTask("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0), 0);
+        SubTask subTask1 = new SubTask(1,"Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0), 0);
+        taskManager.addSubTask(subTask1);
         assertNull(taskManager.getIdSubTask(0));
     }
 
     @Test
     public void testAddAndFindTaskById() {
         InMemoryTaskManager manager = new InMemoryTaskManager();
-        manager.addTask("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
+        Task task1 = new Task("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
+        manager.addTask(task1);
         Task task = manager.getIdTask(0);
         assertNotNull(task);
         assertEquals("Задача 1", task.getTitle());
@@ -46,8 +49,10 @@ class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager> {
     @Test
     public void testAddAndFindSubTaskById() {
         InMemoryTaskManager manager = new InMemoryTaskManager();
-        manager.addEpic("Эпик 1", "Описание эпика 1");
-        manager.addSubTask("Подзадача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0), 0);
+        Epic epic1 = new Epic(0, "Эпик 1", "Описание эпика 1");
+        manager.addEpic(epic1);
+        SubTask subTask1 = new SubTask(1,"Подзадача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0), 0);
+        manager.addSubTask(subTask1);
         SubTask subTask = manager.getIdSubTask(1);
         assertNotNull(subTask);
         assertEquals("Подзадача 1", subTask.getTitle());
@@ -57,7 +62,8 @@ class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager> {
     @Test
     public void testAddAndFindEpicById() {
         InMemoryTaskManager manager = new InMemoryTaskManager();
-        manager.addEpic("Эпик 1", "Описание эпика 1");
+        Epic epic1 = new Epic(0, "Эпик 1", "Описание эпика 1");
+        manager.addEpic(epic1);
         Epic epic = manager.getIdEpic(0);
         assertNotNull(epic);
         assertEquals("Эпик 1", epic.getTitle());
@@ -65,13 +71,13 @@ class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager> {
 
     @Test
     void testTaskImmutabilityAdd() {
-        Task task = new Task("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
-        taskManager.addTask(task.getTitle(), task.getDescription(), task.getDuration(), task.getStartTime());
+        Task task1 = new Task("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
+        taskManager.addTask(task1);
         List<Task> tasks = ((InMemoryTaskManager) taskManager).getAllTasks();
         assertFalse(tasks.isEmpty(), "Список задач не должен быть пустым");
         Task addedTask = tasks.get(tasks.size() - 1);
-        assertEquals(task.getTitle(), addedTask.getTitle());
-        assertEquals(task.getDescription(), addedTask.getDescription());
+        assertEquals(task1.getTitle(), addedTask.getTitle());
+        assertEquals(task1.getDescription(), addedTask.getDescription());
         assertEquals(Status.NEW, addedTask.getStatus());
     }
 

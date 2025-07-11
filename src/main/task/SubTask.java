@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 public class SubTask extends Task {
     private final int epicId;
 
-    public SubTask(int id, String title, String description, Duration duration, LocalDateTime startTime, int epicId) {
+    public SubTask(Integer id, String title, String description, Duration duration, LocalDateTime startTime, int epicId) {
         super(id, title, description, duration, startTime);
         this.epicId = epicId;
     }
