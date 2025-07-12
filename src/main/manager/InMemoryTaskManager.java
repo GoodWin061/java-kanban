@@ -3,8 +3,6 @@ package main.manager;
 import main.history.HistoryManager;
 import main.task.*;
 
-
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,42 +34,44 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void addTask(String title, String description, Duration duration, LocalDateTime startTime) {
-        Task newTask = new Task(idCounter++, title, description, duration, startTime);
+    public void addTask(Task task) {
+        task.setId(idCounter++);
 
-        if (isIntersectingWithAny(newTask)) {
+        if (isIntersectingWithAny(task)) {
             throw new IllegalArgumentException("Новая задача пересекается по времени с другой задачей");
         }
 
-        tasks.put(newTask.getId(), newTask);
-        prioritizedTasks.add(newTask);
+        tasks.put(task.getId(), task);
+        prioritizedTasks.add(task);
     }
 
     @Override
-    public void addSubTask(String title, String description, Duration duration, LocalDateTime startTime, int epicId) {
-        if (epicId == idCounter) {
+    public void addSubTask(SubTask subTask) {
+        if (subTask.getEpicId() == idCounter) {
             System.out.println("Подзадача не может быть назначена эпиком.");
             return;
         }
-        Epic epic = epics.get(epicId);
-        SubTask newSubTask = new SubTask(idCounter++, title, description, duration, startTime, epicId);
 
-        if (isIntersectingWithAny(newSubTask)) {
+        subTask.setId(idCounter++);
+
+        Epic epic = epics.get(subTask.getEpicId());
+
+        if (isIntersectingWithAny(subTask)) {
             throw new IllegalArgumentException("Новая подзадача пересекается по времени с другой задачей");
         }
 
-        subTasks.put(newSubTask.getId(), newSubTask);
-        prioritizedTasks.add(newSubTask);
+        subTasks.put(subTask.getId(), subTask);
+        prioritizedTasks.add(subTask);
         if (epic != null) {
-            epic.addSubTask(newSubTask);
+            epic.addSubTask(subTask);
             updateStatus(epic);
         }
     }
 
     @Override
-    public void addEpic(String title, String description) {
-        Epic newEpic = new Epic(idCounter++, title, description);
-        epics.put(newEpic.getId(), newEpic);
+    public void addEpic(Epic epic) {
+        epic.setId(idCounter++);
+        epics.put(epic.getId(), epic);
     }
 
     @Override
@@ -84,7 +84,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public SubTask getIdSubTask(int id) {
+    public SubTask getIdSubTask(Integer id) {
         SubTask subTask = subTasks.get(id);
         if (subTask != null) {
             historyManager.add(subTask);

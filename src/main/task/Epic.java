@@ -6,11 +6,12 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Epic extends Task {
-    private final List<SubTask> subTasks;
+    //private final List<SubTask> subTasks;
+    private final List<SubTask> subTasks = new ArrayList<>();
 
     public Epic(int id, String title, String description) {
         super(id, title, description, Duration.ZERO, null);
-        this.subTasks = new ArrayList<>();
+       // this.subTasks = new ArrayList<>();
     }
 
     public void addSubTask(SubTask subTask) {

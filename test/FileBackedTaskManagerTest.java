@@ -53,8 +53,10 @@ public class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskMan
 
     @Test
     void testSaveMultipleTasks() {
-        manager.addTask("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
-        manager.addTask("Задача 2", "Описание 2", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 16, 0));
+        Task task1 = new Task("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
+        Task task2 = new Task("Задача 2", "Описание 2", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 16, 0));
+        manager.addTask(task1);
+        manager.addTask(task2);
 
         List<Task> tasks = manager.getAllTasks();
         assertEquals(2, tasks.size());
@@ -63,8 +65,10 @@ public class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskMan
 
     @Test
     void testLoadMultipleTasks() {
-        manager.addTask("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
-        manager.addTask("Задача 2", "Описание 2", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 16, 0));
+        Task task1 = new Task("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0));
+        Task task2 = new Task("Задача 2", "Описание 2", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 16, 0));
+        manager.addTask(task1);
+        manager.addTask(task2);
 
         FileBackedTaskManager loaded = new FileBackedTaskManager(tempFile);
         loaded.loadFromFile();
@@ -78,9 +82,12 @@ public class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskMan
 
     @Test
     void shouldSaveAndLoadTasksCorrectly() {
-        manager.addTask("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 29, 14, 0));
-        manager.addEpic("Эпик 1", "Описание эпика");
-        manager.addSubTask("Подзадача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0), 1);
+        Task task1 = new Task("Задача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 29, 14, 0));
+        manager.addTask(task1);
+        Epic epic1 = new Epic(1,"Эпик 1", "Описание эпика");
+        manager.addEpic(epic1);
+        SubTask subTask1 = new SubTask(2, "Подзадача 1", "Описание 1", Duration.ofHours(2), LocalDateTime.of(2025, 6, 30, 14, 0), 1);
+        manager.addSubTask(subTask1);
 
         FileBackedTaskManager loaded = new FileBackedTaskManager(tempFile);
         loaded.loadFromFile();
